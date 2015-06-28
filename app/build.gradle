@@ -1,16 +1,39 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
+// Versioning Info
+def versionMajor = 0
+def versionMinor = 1
+def versionPatch = 0
+def versionBuild = 0
+
+def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
+
 android {
     compileSdkVersion 22
     buildToolsVersion "23.0.0 rc2"
+
+    signingConfigs {
+    }
+
 
     defaultConfig {
         applicationId "com.shreyaschand.bart"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+        buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -20,6 +43,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.jakewharton:butterknife:6.1.0'
 }
