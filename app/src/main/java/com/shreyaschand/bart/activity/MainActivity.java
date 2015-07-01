@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.shreyaschand.bart.R;
+import com.shreyaschand.bart.fragment.DeparturesFragment;
+import com.shreyaschand.bart.fragment.FavoritesFragment;
 import com.shreyaschand.bart.fragment.ManualRequestFragment;
 
 import butterknife.ButterKnife;
@@ -83,13 +85,13 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_item_favorites:
                     titleRes = R.string.favorites;
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_fragment_container, null)
+                            .replace(R.id.content_fragment_container, new FavoritesFragment())
                             .commit();
                     break;
                 case R.id.nav_item_departures:
                     titleRes = R.string.real_time_departures;
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_fragment_container, null)
+                            .replace(R.id.content_fragment_container, new DeparturesFragment())
                             .commit();
                     break;
                 case R.id.nav_item_debug:

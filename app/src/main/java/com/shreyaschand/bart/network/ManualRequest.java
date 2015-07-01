@@ -4,7 +4,7 @@ import android.net.Uri;
 
 public class ManualRequest extends BartApiRequest {
 
-    private  ManualRequest(String url, BartResponse response) {
+    private ManualRequest(String url, BartResponse response) {
         super(url, response);
     }
 

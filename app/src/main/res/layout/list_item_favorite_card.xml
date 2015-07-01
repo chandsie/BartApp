@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="@dimen/activity_horizontal_margin">
+
+    <View
+        android:id="@+id/color_stripe"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@color/pink_a200" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_title"
+            android:text="Station Name"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_size_subtitle"
+            android:text="Route Name"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/estimates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:orientation="vertical" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

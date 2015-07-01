@@ -29,7 +29,7 @@ public class ManualRequestFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.manual_request_fragment, container, false);
+        View root = inflater.inflate(R.layout.fragment_manual_request, container, false);
         ButterKnife.inject(this, root);
         title.setText("Enter a query to execute");
         description.setMovementMethod(new ScrollingMovementMethod());
