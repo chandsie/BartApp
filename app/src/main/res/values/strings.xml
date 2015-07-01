@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Bart</string>
+    <string name="app_name">BART</string>
+    <string name="action_settings">Settings</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="debug">Debug</string>
+    <string name="favorites">Favorites</string>
+    <string name="real_time_departures">Real-Time Departures</string>
+
+    <string-array name="drawer_items">
+        <item>Favorites</item>
+        <item>Real Time Departures</item>
+        <item>Route Planner</item>
+        <item>Map</item>
+    </string-array>
+
 </resources>
