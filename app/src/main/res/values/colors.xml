@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="black" type="color">#000000</item>
+    <item name="white" type="color">#FFFFFF</item>
+    <item name="gray" type="color">#616161</item>
+
+    <item name="indigo_100" type="color">#C5CAE9</item>
+    <item name="indigo_500" type="color">#3F51B5</item>
+    <item name="indigo_700" type="color">#303F9F</item>
+
+    <item name="pink_a100" type="color">#FF80AB</item>
+    <item name="pink_a200" type="color">#FF4081</item>
+    <item name="pink_a400" type="color">#F50057</item>
+
+</resources>
