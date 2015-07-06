@@ -18,10 +18,10 @@ public abstract class BartApiRequest extends StringRequest {
                                                 .appendQueryParameter("key","Z2VS-JG57-IXMQ-DT35")
                                                 .build();
 
-    public interface BartResponse extends Response.ErrorListener, Response.Listener<String> {
+    public interface BartResponseListener extends Response.ErrorListener, Response.Listener<String> {
     }
 
-    public BartApiRequest(String url, BartResponse response) {
+    public BartApiRequest(String url, BartResponseListener response) {
         super(Method.GET, url, response, response);
     }
 

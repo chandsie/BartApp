@@ -1,5 +1,11 @@
 package com.shreyaschand.bart.model;
 
+import org.simpleframework.xml.convert.Converter;
+import org.simpleframework.xml.stream.InputNode;
+import org.simpleframework.xml.stream.OutputNode;
+
+import java.util.HashMap;
+
 public enum Station {
 
     twelfth      ("12th", "12th St. Oakland City Center"),
@@ -50,8 +56,35 @@ public enum Station {
     public String abbrev;
     public String full;
 
+    private static final HashMap<String, Station> abbrevLookupMap;
+
+    static {
+        abbrevLookupMap = new HashMap<>();
+        Station[] stations = Station.values();
+        for (Station station : stations) {
+            abbrevLookupMap.put(station.abbrev, station);
+        }
+    }
+
+    public static Station findStation(String abbrev) {
+        return abbrevLookupMap.get(abbrev);
+    }
+
     Station(String abbrev, String full) {
         this.abbrev = abbrev;
         this.full = full;
+    }
+
+    public static final class StationAbbreviationConverter implements Converter<Station> {
+
+        @Override
+        public Station read(InputNode node) throws Exception {
+            return Station.findStation(node.getValue().toLowerCase());
+        }
+
+        @Override
+        public void write(OutputNode node, Station value) throws Exception {
+            node.setValue(value.abbrev);
+        }
     }
 }

@@ -26,6 +26,13 @@ public class ManualRequestFragment extends BaseFragment {
 
     BartApiRequest bartApiRequest;
 
+    public static ManualRequestFragment newInstance() {
+        Bundle args = new Bundle();
+        ManualRequestFragment fragment = new ManualRequestFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,7 +52,7 @@ public class ManualRequestFragment extends BaseFragment {
         String endpointPath = endpoint.getText().toString().trim();
         String paramList = params.getText().toString().trim();
 
-        bartApiRequest = ManualRequest.createRequest(endpointPath, paramList, new BartApiRequest.BartResponse() {
+        bartApiRequest = ManualRequest.createRequest(endpointPath, paramList, new BartApiRequest.BartResponseListener() {
             @Override
             public void onResponse(String response) {
                 description.setText(response);

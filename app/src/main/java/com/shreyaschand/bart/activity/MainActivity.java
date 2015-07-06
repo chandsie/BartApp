@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         if (null == savedInstanceState) {
-            navItemId = R.id.nav_item_debug;
+            navItemId = R.id.nav_item_favorites;
         } else {
             navItemId = savedInstanceState.getInt(NAV_ITEM_ID);
         }
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_item_favorites:
                     titleRes = R.string.favorites;
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_fragment_container, new FavoritesFragment())
+                            .replace(R.id.content_fragment_container, FavoritesFragment.newInstance())
                             .commit();
                     break;
                 case R.id.nav_item_departures:
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_item_debug:
                     titleRes = R.string.debug;
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_fragment_container, new ManualRequestFragment())
+                            .replace(R.id.content_fragment_container, ManualRequestFragment.newInstance())
                             .addToBackStack(null)
                             .commit();
                     break;

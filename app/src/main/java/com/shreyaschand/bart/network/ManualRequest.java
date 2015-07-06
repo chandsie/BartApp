@@ -4,11 +4,11 @@ import android.net.Uri;
 
 public class ManualRequest extends BartApiRequest {
 
-    private ManualRequest(String url, BartResponse response) {
+    private ManualRequest(String url, BartResponseListener response) {
         super(url, response);
     }
 
-    public static BartApiRequest createRequest(String path, String paramList, BartResponse response) {
+    public static BartApiRequest createRequest(String path, String paramList, BartResponseListener response) {
         Uri.Builder urlBuilder = baseUrl.buildUpon().appendPath(String.format("%s.aspx", path));
         if (paramList != null && !paramList.isEmpty()) {
             String[] kvPairs = paramList.split(",");

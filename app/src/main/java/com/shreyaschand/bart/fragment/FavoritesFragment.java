@@ -8,19 +8,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.shreyaschand.bart.R;
-import com.shreyaschand.bart.model.Station;
-import com.shreyaschand.bart.network.BartApiRequest;
-import com.shreyaschand.bart.network.RealTimeEstimateRequest;
+import com.shreyaschand.bart.adapter.FavoritesListAdapter;
+import com.shreyaschand.bart.model.StationDestinationEstimate;
+import com.shreyaschand.bart.model.StationEstimate;
+import com.shreyaschand.bart.network.EstimateRequest;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import icepick.Icepick;
 
 public class FavoritesFragment extends BaseFragment {
 
-    @InjectView(R.id.list_view) RecyclerView listView;
+    @InjectView(R.id.list_view)
+    RecyclerView listView;
     RecyclerView.Adapter adapter;
+    EstimateRequest request;
+
+    public static FavoritesFragment newInstance() {
+        Bundle args = new Bundle();
+
+        FavoritesFragment fragment = new FavoritesFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Icepick.restoreInstanceState(this, savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,20 +53,32 @@ public class FavoritesFragment extends BaseFragment {
         ButterKnife.inject(this, root);
         listView.setHasFixedSize(true);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        listView.setAdapter(null);
+        listView.setAdapter(adapter);
 
-        RealTimeEstimateRequest.createRequest(Station.dbrk, new BartApiRequest.BartResponse() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "An error ocurred", Toast.LENGTH_SHORT);
-            }
+        if (adapter == null) {
+            request =
+                    EstimateRequest.createRequest(new EstimateRequest.EstimateResponseListener() {
+                        @Override
+                        public void onError(Exception exception) {
+                            Toast.makeText(getActivity(), "Something went wrong. :(", Toast.LENGTH_SHORT).show();
+                        }
 
-            @Override
-            public void onResponse(String response) {
-
-            }
-        });
-
+                        @Override
+                        public void onSuccess(List<StationEstimate> estimates) {
+                            adapter = new FavoritesListAdapter(StationDestinationEstimate.getEstimateList(estimates));
+                            listView.swapAdapter(adapter, false);
+                        }
+                    });
+            requestQueue.get().add(request);
+        }
         return root;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (request != null) {
+            request.cancel();
+        }
     }
 }
