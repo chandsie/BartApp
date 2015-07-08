@@ -49,7 +49,7 @@ public class DeparturesFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_favorites, container, false);
+        View root = inflater.inflate(R.layout.fragment_departures, container, false);
         ButterKnife.inject(this, root);
         listView.setHasFixedSize(true);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
