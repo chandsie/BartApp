@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_item_departures:
                     titleRes = R.string.real_time_departures;
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.content_fragment_container, new DeparturesFragment())
+                            .replace(R.id.content_fragment_container, DeparturesFragment.newInstance())
                             .commit();
                     break;
                 case R.id.nav_item_debug:
